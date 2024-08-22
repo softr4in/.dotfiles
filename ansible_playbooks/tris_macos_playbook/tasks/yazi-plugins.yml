@@ -1,0 +1,6 @@
+- name: Install mediainfo.yazi plugin
+  command: ya pack -a Ape/mediainfo
+  args:
+    creates: /Users/trisyong/.config/yazi/plugins/mediainfo.yazi
+  become: true
+  tags: [ yazi, first-run ]

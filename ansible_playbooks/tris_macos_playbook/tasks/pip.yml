@@ -1,0 +1,23 @@
+- name: Install pip packages (including pip3 and pipx packages).
+  become: true
+  become_method: su
+  become_user: "{{ home_user }}"
+  pip:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    version: "{{ item.version | default(omit) }}"
+    executable: "{{ item.executable | default(omit) }}"
+  loop: "{{ pip_packages }}"
+  tags: [ pip, first-run ]
+
+- name: Check that certain pipx packages are injected with selected packages.
+  become: true
+  become_method: su
+  become_user: "{{ home_user }}"
+  community.general.pipx:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('inject') }}"
+    inject_packages: "{{ item.inject_packages | default(omit) }}"
+    executable: "{{ item.executable | default(omit) }}"
+  loop: "{{ pipx_packages }}"
+  tags: [ pip, first-run ]

@@ -1,0 +1,6 @@
+{
+  "git": {
+    "sha1": "f71d79a0fffe081c39f5512b790829eadb2788fb"
+  },
+  "path_in_vcs": "crates/egui-winit"
+}

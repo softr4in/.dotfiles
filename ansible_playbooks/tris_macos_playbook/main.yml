@@ -1,0 +1,45 @@
+- name: Configure host.
+  hosts: all
+
+  vars_files:
+    # custom variables for secrets
+    - ~/auth/auth.yml
+    ## custom variables for tasks
+    - ./defaults/vars.yml
+    - ./defaults/brew_vars.yml
+    - ./defaults/dock_vars.yml
+    - ./defaults/brew_packages.yml
+    - ./defaults/pip_packages.yml
+
+  tasks: 
+    # Default python3 is in /usr/bin or, if installed via brew, /opt/homebrew/bin.
+    # However, ansible is now installed via pipx on macOS as an "externally managed environment".
+    # This is needed for ansible to its own python3.
+    - name: Set python3 interpreter
+      set_fact:
+        ansible_python_interpreter: /Users/trisyong/.local/pipx/venvs/ansible/bin/python3
+      tags: [ always ]
+
+    - include_tasks: tasks/sudoers.yml
+      tags: [ sudoers, first-run ]
+
+    - include_tasks: tasks/git-setup.yml
+      tags: [ git-personal, first-run ]
+
+    - include_tasks: tasks/brew.yml
+      tags: [ brew, first-run ]
+
+    - include_tasks: tasks/pip.yml
+      tags: [ pip, first-run ]
+
+    - include_tasks: tasks/yazi-plugins.yml
+      tags: [ yazi, first-run ]
+
+    - include_tasks: tasks/n.yml
+      tags: [ n, first-run ]
+
+    - include_tasks: tasks/macos_defaults.yml
+      tags: [ macos-defaults, first-run ]
+
+    - include_tasks: tasks/dock.yml
+      tags: [ dock, first-run ]

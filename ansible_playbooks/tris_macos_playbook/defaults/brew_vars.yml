@@ -1,0 +1,5 @@
+homebrew_repo: https://github.com/Homebrew/brew
+homebrew_prefix: "/opt/homebrew"
+homebrew_brew_bin_path: "{{ homebrew_prefix }}/bin"
+homebrew_cask_appdir: "/Applications"
+homebrew_cask_accept_external_apps: true

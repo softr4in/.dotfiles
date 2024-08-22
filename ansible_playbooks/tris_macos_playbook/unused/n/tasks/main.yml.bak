@@ -1,0 +1,3 @@
+- name: Install latest version of node via n.
+  shell: n lts
+  become: true

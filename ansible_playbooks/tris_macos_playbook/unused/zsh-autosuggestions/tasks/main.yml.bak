@@ -1,0 +1,9 @@
+- name: Initialize zsh-autosuggestion in .zshrc; not idempotent. Run once for install only.
+  blockinfile:
+    state: present
+    path: /.dotfiles/zsh/.zshrc
+    prepend_newline: true
+    insertafter: EOF
+    block: 'source opt/homebrew/bin/share/zsh-autosuggestions/zsh-autosuggestions.zsh'
+  tags:
+  - first-run

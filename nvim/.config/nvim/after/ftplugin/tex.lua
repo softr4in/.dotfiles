@@ -1,0 +1,16 @@
+-- -- This function, together w/ the autocommands below, fixes broken focus in neovim after reverse search from Skim
+-- -- TODO: vimtex inverse search is broken. high priority fix.
+-- local function TexFocusVim()
+-- 	vim.fn.system("open -a WezTerm")
+-- 	vim.cmd("redraw!")
+-- end
+--
+-- -- Create the augroup
+-- local vimtex_event_focus = vim.api.nvim_create_augroup("vimtex_event_focus", { clear = true })
+--
+-- -- Create the autocmd
+-- vim.api.nvim_create_autocmd("User", {
+-- 	group = vimtex_event_focus,
+-- 	pattern = "VimtexEventViewReverse",
+-- 	callback = TexFocusVim,
+-- })

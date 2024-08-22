@@ -1,0 +1,6 @@
+dock_items:
+  - { path: "/Applications/System Settings.app" }
+  - { path: "/Applications/Spotify.app" }
+  - { path: "/Applications/Obsidian.app/" }
+  - { path: "/Applications/calibre.app/" }
+  - { path: "/Applications/WezTerm.app/" }

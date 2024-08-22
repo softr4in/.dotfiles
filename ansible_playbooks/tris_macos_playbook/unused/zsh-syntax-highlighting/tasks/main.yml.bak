@@ -1,0 +1,9 @@
+- name: Initialize zsh-syntax-highlighting in .zshrc; not idempotent. Run once only for install.
+  ansible.builtin.blockinfile:
+    state: present
+    path: /.dotfiles/zsh/.zshrc
+    prepend_newline: true
+    insertafter: EOF
+    block: 'source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
+  tags:
+  - first-run

@@ -1,0 +1,5 @@
+#!/usr/bin/env perl
+
+$latex = 'uplatex %O -shell-escape %S';
+$lualatex = 'lualatex -shell-escape %O %S';
+

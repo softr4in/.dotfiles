@@ -1,0 +1,28 @@
+return {
+	"lervag/vimtex",
+	lazy = false,
+	init = function()
+		vim.g.vimtex_compiler_latexmk_engines = { _ = "-lualatex" } -- sets luatex as the default engine w/ no need to specify luatex in file
+		vim.g.vimtex_compiler_latexmk = {
+			out_dir = "build",
+			-- sets options for latexmk
+			options = {
+				"-shell-escape",
+				"-verbose",
+				"-file-line-error",
+				"-synctex=1",
+				"-interaction=nonstopmode",
+			},
+		}
+		vim.g.vimtex_complete_enabled = 0 -- disable vimtex completion since nvim-cmp is being used
+		vim.g.vimtex_syntax_conceal_disable = 1 -- disable syntax conceal
+		vim.g.vimtex_quickfix_ignore_filters = {
+			'Package siunitx Warning: Detected the "physics" package',
+			"Overfull \\hbox",
+			"Package caption Warning: \\setcaptiontype outside box or environment",
+			"Package caption Warning: The option `hycap=true` will be ignored for this particular \\caption",
+			"Package microtype Warning: Unable to apply patch",
+		}
+		vim.g.vimtex_quickfix_open_on_warning = 0 -- disable quickfix open on warning
+	end,
+}

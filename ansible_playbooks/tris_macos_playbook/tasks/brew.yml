@@ -1,0 +1,76 @@
+- name: Ensure Homebrew parent directory has correct permissions.
+  file:
+    path: "{{ homebrew_prefix }}"
+    owner: "{{ home_user }}"
+    state: directory
+  become: true
+  tags: [ brew, first-run ]
+
+- name: Check if homebrew already exists.
+  stat:
+    path: "{{ homebrew_brew_bin_path }}/brew"
+  register: pre_installed_brew
+  tags: [ brew, first-run ]
+
+- name: Install homebrew if it is not already installed.
+  git:
+    repo: "{{ homebrew_repo }}"
+    version: master
+    dest: "{{ homebrew_prefix }}"
+    update: false
+    depth: 1
+  become: true
+  become_user: "{{ home_user }}"
+  when: not pre_installed_brew.stat.exists
+  tags: [ brew, first-run ]
+
+- name: Ensure proper permissions and ownership on homebrew_brew_bin_path dirs.
+  file:
+    path: "{{ homebrew_brew_bin_path }}"
+    state: directory
+    owner: "{{ home_user }}"
+    # group: "{{ home_group }}"
+    mode: "0775"
+  become: true
+  tags: [ brew, first-run ]
+
+- name: Ensure proper ownership on homebrew_install_path subdirs.
+  file:
+    path: "{{ homebrew_prefix }}"
+    state: directory
+    owner: "{{ home_user }}"
+    # group: "{{ home_group }}"
+    recurse: true
+    follow: false
+  become: true
+  tags: [ brew, first-run ]
+
+
+- name: Ensure your homebrew formulas are installed.
+  homebrew:
+    path: "{{ homebrew_brew_bin_path }}"
+    name: "{{ item.name | default(item) }}"
+    install_options: "{{ item.install_options | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ homebrew_formulas }}"
+  become: true
+  become_method: su
+  become_user: "{{ home_user }}"
+  tags: [ brew, first-run ]
+
+- name: Ensure your homebrew casks are installed.
+  homebrew_cask:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    install_options: "{{ item.install_options | default('appdir=' + homebrew_cask_appdir) }}"
+    accept_external_apps: "{{ homebrew_cask_accept_external_apps }}"
+    sudo_password: "{{ ansible_become_password | default(omit) }}"
+  loop: "{{ homebrew_casks }}"
+  become: true
+  become_method: su
+  become_user: "{{ home_user }}"
+  tags: [ brew, first-run ]
+
+- name: re-source .zprofile
+  shell: source $HOME/.zprofile
+  tags: [ brew, first-run ]

@@ -1,0 +1,9 @@
+- name: Initialize zoxide in .zshrc; not idempotent. Run once only w/ install tag.
+  ansible.builtin.blockinfile:
+    state: present
+    path: /.dotfiles/zsh/.zshrc
+    prepend_newline: true
+    insertafter: EOF
+    block: 'eval "$(zoxide init zsh)"'
+  tags:
+  - first-run

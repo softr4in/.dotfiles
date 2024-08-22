@@ -1,0 +1,4 @@
+- name: Run script to set macos defaults
+  command: "{{ macos_defaults_script }}"
+  changed_when: false
+  tags: [ macos-defaults, first-run ]

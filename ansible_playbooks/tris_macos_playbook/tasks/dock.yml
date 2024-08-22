@@ -1,0 +1,16 @@
+- name: Ensure clean dock
+  ansible.builtin.command:
+    cmd: dockutil --remove all --no-restart
+  tags: [ dock, first-run ]
+
+- name: Ensure apps added to dock
+  ansible.builtin.command:
+    cmd: dockutil --add "{{ item.path }}" --view "{{ item.view | default('grid') }}" --no-restart
+  with_items:
+    - "{{ dock_items }}"
+  tags: [ dock, first-run ]
+
+- name: Restart dock
+  ansible.builtin.command:
+    cmd: killall Dock
+  tags: [ dock, first-run ]

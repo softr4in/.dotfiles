@@ -1,0 +1,13 @@
+# Both pip3 and pipx packages are listed here
+pip_packages:
+  - name: numpy
+  - name: argcomplete
+  - name: watchdog
+  - name: ansible
+
+pipx_packages:
+  # The same ansible listed under pip; pip module can't check for inject so it's done w/ pipx module
+  - name: ansible
+    inject_packages:
+      - argcomplete
+      - watchdog
