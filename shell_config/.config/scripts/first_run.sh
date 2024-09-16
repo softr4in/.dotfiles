@@ -83,7 +83,7 @@ function _task_done {
 
 # function to install the macOS bare minimum needed for the rest of the installation;
 # apple cli, brew, python 3, pip3, bash 5.2, ansible, bitwarden-cli
-function macos_setup() {
+function macos_setup() {
   if ! [[ -x "$(command -v xcode-select)" ]]; then
     __task "Installing Apple's command line tools (xcode-select)"
     _cmd 'xcode-select --install'

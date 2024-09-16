@@ -5,6 +5,8 @@ local builtin = require("telescope.builtin")
 ----------------------------------------
 ---- Non-plugin keymaps
 ----------------------------------------
+-- death to non-breaking spaces!
+keymap("i", "\\u00A0", "<Space>", { noremap = true, silent = true })
 keymap("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 -- keymap("n", "<leader>pv", vim.cmd.Ex, { desc = "Opens netrw" })
 keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Moves selected line(s) down by one line and reselects moved text" })
