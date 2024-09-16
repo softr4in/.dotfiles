@@ -89,17 +89,17 @@ function macos_setup() {
     _cmd 'xcode-select --install'
   fi
 
-  if ! [[ -x "/opt/homebrew/bin/stow" ]]; then
-    __task "Install stow and run stow script"
-    _cmd 'brew install stow'
-    _cmd '/bin/zsh $HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/roles/stow/files/stowall.sh'
-  fi
-
   # export PATH in terminal once since .zprofile is not stowed yet and stow comes from brew
   if ! [[ -x "/opt/homebrew/bin" ]]; then
     __task "Installing Homebrew"
     _cmd 'sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
     _cmd 'export PATH="/opt/homebrew/bin:$PATH"'
+  fi
+
+  if ! [[ -x "/opt/homebrew/bin/stow" ]]; then
+    __task "Install stow and run stow script"
+    _cmd 'brew install stow'
+    _cmd '/bin/zsh $HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/roles/stow/files/stowall.sh'
   fi
 
   if ! [[ -x "/opt/homebrew/bin/pipx" ]]; then
@@ -139,7 +139,7 @@ set -e
 if [[ ! -d "$DOTFILES_DIR" ]]; then
   __task "Cloning repository"
   _cmd "cd $HOME"
-  _cmd "git clone --quiet https://github.com/softr4in/.dotfiles.git"
+  _cmd "git clone https://github.com/softr4in/.dotfiles.git"
 fi
 
 # 2. Install the bare minimum needed for ansible to take over the rest of the deployment
