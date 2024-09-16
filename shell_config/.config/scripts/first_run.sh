@@ -129,15 +129,14 @@ function macos_setup() {
   fi
 }
 
-# NOTE: DEPLOYMENT LOGIC: cloning dotfiles, installing ansible and running ansible-playbook
-# this assumes you have completed the pre-deployment steps.
+# NOTE: Cloning dotfiles, installing ansible and running ansible-playbook
 
 # script exits immediately if any command fails
 set -e
 
-# 1. Check if .dotfiles repo exists; if not, clone .dotfiles repo into $HOME;
+# 1. Check if .dotfiles repo exists in $HOME; if not, clone .dotfiles repo into $HOME;
 # make sure your remote repo url is valid or this step will fail
-if ! [[ -d "$DOTFILES_DIR" ]]; then
+if [[ ! -d "$DOTFILES_DIR" ]]; then
   __task "Cloning repository"
   _cmd "git clone --quiet https://github.com/softr4in/.dotfiles.git $HOME"
 fi
