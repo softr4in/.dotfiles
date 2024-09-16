@@ -1,7 +1,7 @@
 #!/bin/bash
 
 alias ls="eza --icons=always"
-alias la="eza --all --icons=always"
+alias la="eza -la --icons=always"
 alias cd="z"
 alias stowall="source ~/.config/scripts/stowall.sh"
 alias bw_unlock="source ~/.config/scripts/bw_unlock.sh"
