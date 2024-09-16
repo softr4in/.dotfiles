@@ -138,7 +138,8 @@ set -e
 # make sure your remote repo url is valid or this step will fail
 if [[ ! -d "$DOTFILES_DIR" ]]; then
   __task "Cloning repository"
-  _cmd "git clone --quiet https://github.com/softr4in/.dotfiles.git $HOME"
+  _cmd "cd $HOME"
+  _cmd "git clone --quiet https://github.com/softr4in/.dotfiles.git"
 fi
 
 # 2. Install the bare minimum needed for ansible to take over the rest of the deployment
