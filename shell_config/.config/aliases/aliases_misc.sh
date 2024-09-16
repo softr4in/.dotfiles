@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias ls="eza --icons=always"
+alias ls="eza -a --icons=always"
 alias la="eza -la --icons=always"
 alias cd="z"
 alias stowall="source ~/.config/scripts/stowall.sh"

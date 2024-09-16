@@ -14,17 +14,17 @@ else
 fi
 
 # If github ssh key is not decrypted yet, do it. 
-if grep AES256 ~/.ssh/github.com/github-auth-ed25519; then
-  ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_playbooks/tris_macos_playbook/scripts/vault_secrets.sh ~/.ssh/github.com/github-auth-ed25519
+if grep AES256 ~/homefiles/auth/.ssh/github.com/github-auth-ed25519; then
+  ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_playbooks/tris_macos_playbook/scripts/vault_secrets.sh ~/homefiles/auth/.ssh/github.com/github-auth-ed25519
   echo "Github SSH key is decrypted."
 fi
 
 # If github ssh key is already decrypted,
 # add to ssh-agent, encrypt key, push
-if ! grep AES256 ~/.ssh/github.com/github-auth-ed25519; then
+if ! grep AES256 ~/homefiles/auth/.ssh/github.com/github-auth-ed25519; then
   killall ssh-agent || true
   eval $(ssh-agent -s)
-  ssh-add -t 24h $HOME/.ssh/github.com/github-auth-ed25519
+  ssh-add -t 24h $HOME/homefiles/auth/.ssh/github.com/github-auth-ed25519
 fi
 
 # cd into dotfiles dir, push and return to previous dir
@@ -33,5 +33,5 @@ git push
 cd ~-
 
 # re-encrypt key
-ansible-vault encrypt --vault-password-file ~/.dotfiles/ansible_playbooks/tris_macos_playbook/scripts/vault_secrets.sh ~/.ssh/github.com/github-auth-ed25519
+ansible-vault encrypt --vault-password-file ~/.dotfiles/ansible_playbooks/tris_macos_playbook/scripts/vault_secrets.sh ~/homefiles/auth/.ssh/github.com/github-auth-ed25519
 echo "Github SSH key is encrypted."

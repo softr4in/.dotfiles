@@ -39,7 +39,6 @@ RIGHT_ANGLE="${GREEN}\xE2\x88\x9F${NC}"
 DOTFILES_LOG="$HOME/.dotfiles.log"
 VAULT_SECRET="$HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/scripts/vault_secrets.sh"
 DOTFILES_DIR="$HOME/.dotfiles"
-SSH_DIR="$HOME/.ssh"
 
 # NOTE: function definitions
 
