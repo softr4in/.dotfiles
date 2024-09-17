@@ -89,13 +89,6 @@ function macos_setup() {
     _cmd 'xcode-select --install'
   fi
 
-  # export PATH in terminal once since .zprofile is not stowed yet and stow comes from brew
-  if ! [[ -x "/opt/homebrew/bin" ]]; then
-    __task "Installing Homebrew"
-    _cmd '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-    _cmd 'export PATH="/opt/homebrew/bin:$PATH"'
-  fi
-
   if ! [[ -x "/opt/homebrew/bin" ]]; then
     __task "Installing Homebrew"
     _cmd 'export PATH="/opt/homebrew/bin:$PATH"'
@@ -105,7 +98,7 @@ function macos_setup() {
   if ! [[ -x "/opt/homebrew/bin/stow" ]]; then
     __task "Install stow and run stow script"
     _cmd "brew install stow"
-    _cmd "/bin/zsh $HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/roles/stow/files/stowall.sh"
+    $HOME/.dotfiles/shell_config/.config/scripts/stowall.sh
   fi
 
   if ! [[ -x "/opt/homebrew/bin/pipx" ]]; then
