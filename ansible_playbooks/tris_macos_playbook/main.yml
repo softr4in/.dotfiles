@@ -3,7 +3,7 @@
 
   vars_files:
     # custom variables for secrets
-    - ~/auth/auth.yml
+    - ~/homefiles/auth/auth.yml
     ## custom variables for tasks
     - ./defaults/vars.yml
     - ./defaults/brew_vars.yml

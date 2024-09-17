@@ -164,7 +164,7 @@ esac
 #    decrypted data exists only in memory and isn't written to disk
 __task "Running playbook"; _task_done
   printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}Running playbook with vault secret${NC}\n"
-  ansible-playbook -t first-run --vault-password-file $VAULT_SECRET "$HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/main.yml" -v
+  ansible-playbook -t first-run -i ~/.dotfiles/ansible_playbooks/tris_macos_playbook/inventory --vault-password-file $VAULT_SECRET ~/.dotfiles/ansible_playbooks/tris_macos_playbook/main.yml -v
 
 # 4. Messages to relay successful execution of script
 echo -e "${CHECK_MARK} ${GREEN}Script for first run of playbook successfully completed!${NC}"
