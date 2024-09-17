@@ -4,7 +4,7 @@
 # Aliases                                                                     #
 ###############################################################################
 
-for file in $HOME/.config/aliases/*.sh; do
+for file in ~/.config/aliases/*.sh; do
   source "$file"
 done
 
@@ -33,7 +33,8 @@ eval "$(zoxide init zsh)"
 # Functions                                                                   #
 ###############################################################################
 
-source $HOME/.config/functions/various_functions.sh
+source ~/.config/definitions/y_definition.sh
+source ~/.config/definitions/misc_definitions.sh
 
 ###############################################################################
 # Keybindings                                                                 #

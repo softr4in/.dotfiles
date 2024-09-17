@@ -17,9 +17,10 @@ else
 fi
 
 export VISUAL="$EDITOR"
+export ANSIBLE_CONFIG="~/.dotfiles/ansible_playbooks/tris_macos_playbook/ansible.cfg"
 
 ###############################################################################
 # Add directories to $PATH                                                    #
 ###############################################################################
 
-source $HOME/.config/functions/path.sh
+source ~/.config/calls/add_path_calls.sh

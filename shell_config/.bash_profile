@@ -1,1 +1,1 @@
-source $HOME/.config/functions/path.sh
+source ~/.config/calls/add_path_calls.sh
