@@ -47,7 +47,7 @@ function __task {
   if [[ $TASK != "" ]]; then
     printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}${TASK}\n"
   fi
-  TASK=\$1
+  TASK=$1
   printf "${LBLACK} [ ]  ${TASK} \n${LRED}"
 }
 
@@ -143,7 +143,7 @@ if [[ ! -d "$DOTFILES_DIR" ]]; then
 fi
 
 # 2. Install the bare minimum needed for ansible to take over the rest of the deployment
-if [[ "$OSTYPE == darwin"* ]]; then
+if [[ "$OSTYPE" == darwin* ]]; then
   ID="macos"
 else
   source /etc/os-release
@@ -153,9 +153,7 @@ case $ID in
   macos)
     macos_setup
     ;;
-  # ubuntu)
-  #   ubuntu_setup
-  #   ;;
+
   *)
     __task "Unsupported OS"
     _cmd "echo 'Unsupported OS'"
@@ -166,7 +164,7 @@ esac
 #    decrypted data exists only in memory and isn't written to disk
 __task "Running playbook"; _task_done
   printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}Running playbook with vault secret${NC}\n"
-  ansible-playbook -t first-run --vault-password-file $VAULT_SECRET "$HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/main.yml -v"
+  ansible-playbook -t first-run --vault-password-file $VAULT_SECRET "$HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/main.yml" -v
 
 # 4. Messages to relay successful execution of script
 echo -e "${CHECK_MARK} ${GREEN}Script for first run of playbook successfully completed!${NC}"
