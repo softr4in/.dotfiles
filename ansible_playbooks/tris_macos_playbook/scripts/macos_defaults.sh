@@ -82,8 +82,9 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Disable auto text completion
 defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
 
-# Turn on Ctrl + Space to switch language input source
-/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:60:enabled true" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+# FIX: doesn't work
+# # Turn on Ctrl + Space to switch language input source
+# /usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:60:enabled true" ~/Library/Preferences/com.apple.symbolichotkeys.plist
 
 # Revert to default F1-F12 behaviour
 defaults write com.apple.HIToolbox AppleFnUsageType -int 1
