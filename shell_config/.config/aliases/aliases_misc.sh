@@ -5,6 +5,7 @@ alias la="eza -la --icons=always"
 alias cd="z"
 alias stowall="source ~/.config/scripts/stowall.sh"
 alias bw_unlock="source ~/.config/scripts/bw_unlock.sh"
+alias dequarantine="~/.config/scripts/dequarantine.sh"
 alias dot_push="~/.config/scripts/dot_push.sh"
 alias dot='ansible-playbook --vault-password-file $HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/scripts/vault_secrets.sh $HOME/.dotfiles/ansible_playbooks/tris_macos_playbook/main.yml "$@" -v'
 # python 3 in ansible's virtual environment

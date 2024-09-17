@@ -17,7 +17,12 @@ else
 fi
 
 export VISUAL="$EDITOR"
+
+# allows beautiful_output.py to work when running ansible-playbook outside of playbook dir
 export ANSIBLE_CONFIG="~/.dotfiles/ansible_playbooks/tris_macos_playbook/ansible.cfg"
+
+# syntax highlighting for man pages. bat is awesome
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 ###############################################################################
 # Add directories to $PATH                                                    #
