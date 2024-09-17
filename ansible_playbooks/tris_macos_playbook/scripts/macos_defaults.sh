@@ -73,7 +73,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a significantly faster keyboard repeat rate, and make it happen more quickly.
 # (The KeyRepeat option requires logging out and back in to take effect.)
-defaults write NSGlobalDomain InitialKeyRepeat -int 20
+defaults write NSGlobalDomain InitialKeyRepeat -int 30
 defaults write NSGlobalDomain KeyRepeat -int 2
 
 # Disable autocorrect
