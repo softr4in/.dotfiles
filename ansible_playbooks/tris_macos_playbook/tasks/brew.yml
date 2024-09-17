@@ -4,13 +4,13 @@
     owner: "{{ home_user }}"
     state: directory
   become: true
-  tags: [ brew, first-run ]
+  tags: [ brew, first-run, regular ]
 
 - name: Check if homebrew already exists.
   stat:
     path: "{{ homebrew_brew_bin_path }}/brew"
   register: pre_installed_brew
-  tags: [ brew, first-run ]
+  tags: [ brew, first-run, regular ]
 
 - name: Install homebrew if it is not already installed.
   git:
@@ -22,7 +22,7 @@
   become: true
   become_user: "{{ home_user }}"
   when: not pre_installed_brew.stat.exists
-  tags: [ brew, first-run ]
+  tags: [ brew, first-run, regular ]
 
 - name: Ensure proper permissions and ownership on homebrew_brew_bin_path dirs.
   file:
@@ -32,7 +32,7 @@
     # group: "{{ home_group }}"
     mode: "0775"
   become: true
-  tags: [ brew, first-run ]
+  tags: [ brew, first-run, regular ]
 
 - name: Ensure proper ownership on homebrew_install_path subdirs.
   file:
@@ -43,10 +43,10 @@
     recurse: true
     follow: false
   become: true
-  tags: [ brew, first-run ]
+  tags: [ brew, first-run, regular ]
 
 
-- name: Ensure your homebrew formulas are installed.
+- name: Check that the homebrew formulas you want are installed.
   homebrew:
     path: "{{ homebrew_brew_bin_path }}"
     name: "{{ item.name | default(item) }}"
@@ -56,9 +56,9 @@
   become: true
   become_method: su
   become_user: "{{ home_user }}"
-  tags: [ brew, first-run ]
+  tags: [ brew, first-run, regular ]
 
-- name: Ensure your homebrew casks are installed.
+- name: Check that the homebrew casks you want are installed.
   homebrew_cask:
     name: "{{ item.name | default(item) }}"
     state: "{{ item.state | default('present') }}"
@@ -69,8 +69,8 @@
   become: true
   become_method: su
   become_user: "{{ home_user }}"
-  tags: [ brew, first-run ]
+  tags: [ brew, first-run, regular ]
 
 - name: re-source .zprofile
   shell: source $HOME/.zprofile
-  tags: [ brew, first-run ]
+  tags: [ brew, first-run, regular ]

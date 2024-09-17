@@ -73,7 +73,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a significantly faster keyboard repeat rate, and make it happen more quickly.
 # (The KeyRepeat option requires logging out and back in to take effect.)
-defaults write NSGlobalDomain InitialKeyRepeat -int 30
+defaults write NSGlobalDomain InitialKeyRepeat -int 50
 defaults write NSGlobalDomain KeyRepeat -int 2
 
 # Disable autocorrect
@@ -142,7 +142,7 @@ chflags nohidden ~/Library
 ###############################################################################
 
 # Set the icon size of Dock items
-defaults write com.apple.dock tilesize -int 30
+defaults write com.apple.dock tilesize -int 100
 
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.15

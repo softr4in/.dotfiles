@@ -81,67 +81,59 @@ function _task_done {
   _clear_task
 }
 
-# function to install the macOS bare minimum needed for the rest of the installation;
-# apple cli, brew, python 3, pip3, bash 5.2, ansible, bitwarden-cli
+# function to install the brew and pip packages
 function macos_setup() {
-  if ! [[ -x "$(command -v xcode-select)" ]]; then
-    __task "Installing Apple's command line tools (xcode-select)"
-    _cmd 'xcode-select --install'
-  fi
+  export PATH="/opt/homebrew/bin:~/.local/bin:$PATH"
 
   if ! [[ -x "/opt/homebrew/bin" ]]; then
     __task "Installing Homebrew"
-    _cmd 'export PATH="/opt/homebrew/bin:$PATH"'
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  else
+    echo "Homebrew is already installed."
   fi
 
-  if ! [[ -x "/opt/homebrew/bin/stow" ]]; then
-    __task "Install stow and run stow script"
-    _cmd "brew install stow"
-    $HOME/.dotfiles/shell_config/.config/scripts/stowall.sh
-  fi
+  __task "Installing Homebrew bundle"
+  _cmd "brew bundle install --file=~/homefiles/Brewfile"
 
-  if ! [[ -x "/opt/homebrew/bin/pipx" ]]; then
-    __task "Installing pipx, watchdog, argcomplete, ansible"
-    _cmd "brew install pipx"
+  __task "Unstowing and restowing all config files"
+  _cmd "source ~/.dotfiles/shell_config/.config/scripts/stowall.sh"
+
+  if ! [[ -x "~/.local/bin/ansible" ]]; then
+    __task "Installing ansible"
     _cmd "pipx install --include-deps ansible"
-    _cmd "pipx inject ansible watchdog"
-    _cmd "pipx inject ansible argcomplete"
-    # installs pipx to python3 in ansible's virtual environment
-    _cmd "python3 -m pip install pipx"
+  else
+    echo "ansible is already installed."
   fi
 
-  # >= bash 4.2 needed for ansible shell completion; might as well upgrade to bash 5.2
-  if [[ "$(bash --version | head -n 1 | awk '{print $4}' | cut -d'.' -f1,2)" < "5.2" ]]; then
-    __task "Installing latest bash (5.2)"
-    _cmd "brew install bash"
+  # needs to source .profile again to detect ansible in PATH
+  source /Users/trisyong/.config/scripts/re_source.sh
+
+  _cmd "pipx inject ansible watchdog"
+  _cmd "pipx inject ansible argcomplete"
+
+  if ! [[ -x "~/.local/pipx/venvs/ansible/bin/python3" ]]; then
+    __task "Installs pipx to python3 in ansible's virtual environment"
+    /bin/bash -c "python3 -m pip install pipx"
+  else
+    echo "python3 in ansible already installed."
   fi
 
-  # WARN: as of 25-Aug-2024: no linux arm64 support for either bitwarden cli or 1password cli;
-  if ! [[ -x "$(command -v bw)" ]]; then
-    __task "Install, login and unlock Bitwarden cli"
-    _cmd "brew install bitwarden-cli"
-    _cmd "bw login"
-    _cmd "bw unlock"
-    _cmd "export BW_SESSION=$(bw unlock --raw)"
-    _cmd "bw status | grep -q 'unlocked'"
-  fi
+  # Unlock bitwarden-cli
+  /Users/tristong/.config/scripts/bw_unlock.sh
 }
 
 # NOTE: Cloning dotfiles, installing ansible and running ansible-playbook
 
-# script exits immediately if any command fails
-set -e
-
 # 1. Check if .dotfiles repo exists in $HOME; if not, clone .dotfiles repo into $HOME;
 # make sure your remote repo url is valid or this step will fail
+
 if [[ ! -d "$DOTFILES_DIR" ]]; then
   __task "Cloning repository"
   _cmd "cd $HOME"
   _cmd "git clone https://github.com/softr4in/.dotfiles.git"
 fi
 
-# 2. Install the bare minimum needed for ansible to take over the rest of the deployment
+# 2. Install the brew and pip packages
 if [[ "$OSTYPE" == darwin* ]]; then
   ID="macos"
 else
@@ -159,11 +151,11 @@ case $ID in
     ;;
 esac
 
-# 3. Run ansible-playbook and checks for ansible-vault password to decrypt on the fly;
+# 3. Install macOS defaults
+source ~/.dotfiles/shell_config/.config/scripts/macos_defaults.sh
+
+# 4. Run ansible-playbook and checks for ansible-vault password to decrypt on the fly;
 #    decrypted data exists only in memory and isn't written to disk
 __task "Running playbook"; _task_done
   printf "${OVERWRITE}${LGREEN} [✓]  ${LGREEN}Running playbook with vault secret${NC}\n"
   ansible-playbook -t first-run -i ~/.dotfiles/ansible_playbooks/tris_macos_playbook/inventory --vault-password-file $VAULT_SECRET ~/.dotfiles/ansible_playbooks/tris_macos_playbook/main.yml -v
-
-# 4. Messages to relay successful execution of script
-echo -e "${CHECK_MARK} ${GREEN}Script for first run of playbook successfully completed!${NC}"

@@ -5,6 +5,7 @@ homebrew_formulas:
   - name: fd
   - name: ffmpeg
   - name: ffmpegthumbnailer
+  - name: fzf
   - name: gh
   - name: git
   - name: luajit
@@ -36,6 +37,7 @@ homebrew_casks:
   - name: firefox
   - name: font-hack-nerd-font
   - name: google-chrome
+  - name: nikitabobko/tap/aerospace
   - name: inkscape
   - name: iterm2
   - name: karabiner-elements

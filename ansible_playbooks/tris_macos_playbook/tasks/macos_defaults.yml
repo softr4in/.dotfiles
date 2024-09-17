@@ -1,5 +1,0 @@
-- name: Run script to set macos defaults
-  command: /Users/trisyong/.dotfiles/ansible_playbooks/tris_macos_playbook/scripts/macos_defaults.sh --no-restart
-  changed_when: false
-  become: true
-  tags: [ macos-defaults, first-run ]

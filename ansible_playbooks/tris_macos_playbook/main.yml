@@ -20,26 +20,23 @@
         ansible_python_interpreter: /Users/trisyong/.local/pipx/venvs/ansible/bin/python3
       tags: [ always ]
 
-    - include_tasks: tasks/sudoers.yml
-      tags: [ sudoers, first-run ]
-
     - include_tasks: tasks/git-setup.yml
       tags: [ git-personal, first-run ]
 
     - include_tasks: tasks/brew.yml
-      tags: [ brew, first-run ]
+      tags: [ brew, first-run, regular ]
 
     - include_tasks: tasks/pip.yml
-      tags: [ pip, first-run ]
+      tags: [ pip, first-run, regular ]
+
+    - include_tasks: tasks/sudoers.yml
+      tags: [ sudoers, first-run ]
 
     - include_tasks: tasks/yazi-plugins.yml
       tags: [ yazi, first-run ]
 
     - include_tasks: tasks/n.yml
       tags: [ n, first-run ]
-
-    - include_tasks: tasks/macos_defaults.yml
-      tags: [ macos-defaults, first-run ]
 
     - include_tasks: tasks/dock.yml
       tags: [ dock, first-run ]

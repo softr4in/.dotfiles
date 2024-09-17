@@ -1,4 +1,4 @@
-- name: Install latest node
+- name: Install the latest version of node.
   command: n lts
   become: true
   tags: [ n, first-run ]

@@ -1,4 +1,4 @@
-- name: Install pip packages (including pip3 and pipx packages).
+- name: Check that the pip3 and pipx packages you want are installed.
   become: true
   become_method: su
   become_user: "{{ home_user }}"
@@ -8,7 +8,7 @@
     version: "{{ item.version | default(omit) }}"
     executable: "{{ item.executable | default(omit) }}"
   loop: "{{ pip_packages }}"
-  tags: [ pip, first-run ]
+  tags: [ pip, first-run, regular ]
 
 - name: Check that certain pipx packages are injected with selected packages.
   become: true
@@ -20,4 +20,4 @@
     inject_packages: "{{ item.inject_packages | default(omit) }}"
     executable: "{{ item.executable | default(omit) }}"
   loop: "{{ pipx_packages }}"
-  tags: [ pip, first-run ]
+  tags: [ pip, first-run, regular ]
