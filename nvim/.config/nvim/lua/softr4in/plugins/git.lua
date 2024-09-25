@@ -12,6 +12,12 @@ return {
 	{
 		-- nice ui/ux for reviewing diffs for all modified files
 		"sindrets/diffview.nvim",
+		config = function()
+			local map = vim.keymap.set
+			---- Diffview keymaps
+			map("n", "<leader><leader>do", "<cmd>DiffviewOpen<cr>", { desc = "Open Diffview" })
+			map("n", "<leader><leader>dc", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" })
+		end,
 	},
 	-- Fully featured git wrapper
 	"tpope/vim-fugitive",

@@ -2,7 +2,13 @@ return {
 	-- NOTE: Plugins that require little to no configuration.
 
 	-- Browse and switch between different undo branches
-	"mbbill/undotree",
+	{
+		"mbbill/undotree",
+		config = function()
+			-- Undotree
+			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+		end,
+	},
 	{
 		-- easy block comment/comment out
 		"numToStr/Comment.nvim",
@@ -50,6 +56,13 @@ return {
 		-- Diagnostics aid
 		"folke/trouble.nvim",
 		config = function()
+			---- Trouble
+			vim.keymap.set(
+				"n",
+				"<leader>T",
+				":TodoTelescope keywords=TODO,HACK,FIX,WARNING<CR>",
+				{ desc = "Lists special comments (trouble)" }
+			)
 			require("trouble").setup()
 		end,
 	},

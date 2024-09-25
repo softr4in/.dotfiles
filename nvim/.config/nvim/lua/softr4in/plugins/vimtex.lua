@@ -2,6 +2,10 @@ return {
 	"lervag/vimtex",
 	lazy = false,
 	init = function()
+		local map = vim.keymap.set
+		---- Vimtex keymaps
+		map("n", "<leader>sf", "<Plug>(vimtex-view)", { desc = "Forward search (vimtex)" })
+		map("n", "<leader>ll", "<Plug>(vimtex-compile)", { desc = "Toggle continuous pdf compilation (vimtex)" })
 		vim.g.vimtex_view_method = "sioyek"
 		-- sets luatex as the default engine w/ no need to specify luatex in file
 		vim.g.vimtex_compiler_latexmk_engines = { _ = "-lualatex" }
