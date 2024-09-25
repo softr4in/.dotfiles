@@ -54,7 +54,7 @@ return {
 		end,
 	},
 	{
-		-- Colors for special comments and jumpting to these comments
+		-- Colors for special comments and jumping to these comments
 		"folke/todo-comments.nvim",
 		config = function()
 			require("todo-comments").setup()

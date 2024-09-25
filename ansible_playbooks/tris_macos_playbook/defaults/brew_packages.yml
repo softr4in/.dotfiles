@@ -46,6 +46,7 @@ homebrew_casks:
   - name: mactex
   - name: obsidian
   - name: qbittorrent
+  - name: sioyek
   - name: spotify
   - name: steam
   - name: the-unarchiver

@@ -113,6 +113,11 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-0 = 'workspace 0'
+alt-f = 'workspace f'
+alt-m = 'workspace m'
+alt-r = 'workspace r'
+alt-v = 'workspace v'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -124,8 +129,13 @@ alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 0'
+alt-shift-f = 'move-node-to-workspace f'
+alt-shift-m = 'move-node-to-workspace m'
+alt-shift-r = 'move-node-to-workspace r'
+alt-shift-v = 'move-node-to-workspace v'
 
-alt-shift-f = 'fullscreen'
+alt-ctrl-f = 'fullscreen'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -166,13 +176,29 @@ if.app-id = 'com.yida.chatgpt.next.web'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-if.app-id = 'md.obsidian'
+if.app-id = 'info.sioyek.sioyek'
 run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-if.app-id = 'com.bitwarden.desktop'
+if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Music'
+if.app-id = 'com.bitwarden.desktop'
 run = 'move-node-to-workspace 7'
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.calibre'
+run = 'move-node-to-workspace r'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'move-node-to-workspace f'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Music'
+run = 'move-node-to-workspace m'
+
+[[on-window-detected]]
+if.app-id = 'org.videolan.vlc'
+run = 'move-node-to-workspace v'

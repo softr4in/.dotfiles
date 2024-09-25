@@ -69,7 +69,7 @@ return {
 					},
 				},
 				-- Typescript/JS LSP (no linting)
-				tsserver = {
+				ts_ls = {
 					server_capabilities = {
 						documentFormattingProvider = false,
 					},

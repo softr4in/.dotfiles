@@ -54,7 +54,6 @@
                     },
                     {
                         "description": "L_Ctrl + w to pageup, L_Ctrl + s to pagedown",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
