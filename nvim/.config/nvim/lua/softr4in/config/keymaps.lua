@@ -6,7 +6,7 @@ local map = vim.keymap.set
 ----------------------------------------
 
 -- Death to non-breaking spaces!
-map("i", "\\u00A0", "<Space>", { noremap = true, silent = true })
+map("", "\\u00A0", "<Space>", { noremap = true, silent = true })
 map("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 -- map("n", "<leader>pv", vim.cmd.Ex, { desc = "Opens netrw" })
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Moves selected line(s) down by one line and reselects moved text" })

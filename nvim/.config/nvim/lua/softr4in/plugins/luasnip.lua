@@ -4,7 +4,6 @@ return {
 		local ls = require("luasnip")
 		local map = vim.keymap.set
 
-		---- Luasnip keymaps
 		-- Expand or jump in insert mode
 		map(
 			"i",
